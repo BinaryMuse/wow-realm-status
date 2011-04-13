@@ -61,7 +61,7 @@ def get_realm_json
   begin
     api_url = 'http://us.battle.net/api/wow/realm/status'
     uri     = URI.parse api_url
-    json    = Net::HTTP.get(uri).to_s
+    json    = Net::HTTP.get(uri)
     JSON::parse(json).fetch('realms')
   rescue
     haml :'500'
