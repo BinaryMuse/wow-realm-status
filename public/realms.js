@@ -11,6 +11,8 @@ String.prototype.startsWith = function(other, case_cmp) {
 }
 
 $(function(){
+  $("#search input").focus();
+
   $("#realm-searcher").bind("keyup", function() {
     search = $(this).val();
     if(search == "") {
