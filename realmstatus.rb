@@ -57,6 +57,7 @@ def realm_data
 end
 
 def get_realm_json
+  puts "Getting realm data from API"
   begin
     api_url = 'http://us.battle.net/api/wow/realm/status'
     uri     = URI.parse api_url
