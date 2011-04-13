@@ -1,6 +1,6 @@
 html {
   overflow: -moz-scrollbars-vertical;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 body {
