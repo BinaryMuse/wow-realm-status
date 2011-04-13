@@ -19,9 +19,9 @@ get '/favicon.ico' do
   nil
 end
 
-def set_cache(key, data, ttl = nil, options = {})
+def set_cache(key, data)
   begin
-    settings.cache.set(key, data, ttl, options)
+    settings.cache.set(key, data)
   rescue Dalli::RingError
     nil
   end
@@ -50,7 +50,7 @@ def get_realm_json
   uri     = URI.parse api_url
   json    = Net::HTTP.get(uri)
   set_cache('realm_json', json)
-  set_cache('updated', Time.now, nil, :raw => true)
+  set_cache('updated', Time.now)
   json
 end
 
