@@ -66,7 +66,3 @@ get '/:realm' do |name|
   @time   = get_cache('updated')
   haml :realms
 end
-
-get '/wtf' do
-  return haml :'500'
-end
