@@ -19,9 +19,9 @@ get '/favicon.ico' do
   nil
 end
 
-def set_cache(key, data)
+def set_cache(key, data, ttl, options)
   begin
-    settings.cache.set(key, data)
+    settings.cache.set(key, data, ttl, options)
   rescue Dalli::RingError
     nil
   end
