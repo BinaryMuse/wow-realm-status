@@ -31,7 +31,7 @@ helpers do
     when "medium"
       "Medium"
     when "low"
-      "low"
+      "Low"
     else
       pop
     end
