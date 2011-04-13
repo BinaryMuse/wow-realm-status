@@ -1,4 +1,6 @@
-%h1= "#{realm['name']} (#{proper_realm_type realm['type']})"
+%h1
+  = link_to realm['name'], "/#{realm['slug']}"
+  = "(#{proper_realm_type realm['type']})"
 
 %p
   Status:

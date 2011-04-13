@@ -7,6 +7,10 @@ require 'partials'
 
 helpers Sinatra::Partials
 helpers do
+  def link_to(text, url)
+    "<a href='#{url}' />#{text}</a>"
+  end
+
   def proper_realm_type(type)
     case type
     when "pvp"
@@ -68,7 +72,9 @@ get '/' do
   haml :realms
 end
 
-get '/:realm' do
-  data   = realm_data
-  @realm = realm_data
+get '/:realm' do |name|
+  @data = realm_data.find_all do |realm|
+    realm["slug"].start_with?(name) || realm["name"].start_with?(name)
+  end
+  haml :realms
 end
