@@ -29,7 +29,7 @@ end
 
 def get_cache(key)
   begin
-    settings.cache.get('realm_json')
+    settings.cache.get(key)
   rescue Dalli::RingError
     nil
   end
