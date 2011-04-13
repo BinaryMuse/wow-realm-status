@@ -1,0 +1,21 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    dalli (1.0.3)
+    haml (3.0.25)
+    rack (1.2.2)
+    shotgun (0.9)
+      rack (>= 1.0)
+    sinatra (1.2.3)
+      rack (~> 1.1)
+      tilt (>= 1.2.2, < 2.0)
+    tilt (1.2.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  dalli
+  haml
+  shotgun
+  sinatra
