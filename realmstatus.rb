@@ -50,10 +50,11 @@ end
 
 def realm_data
   begin
-    settings.cache.get('realm_json') || get_realm_json
+    json = settings.cache.get('realm_json') || get_realm_json
   rescue Dalli::RingError
-    get_realm_json
+    json = get_realm_json
   end
+  JSON::parse(json).fetch('realms')
 end
 
 def get_realm_json
@@ -62,7 +63,8 @@ def get_realm_json
     api_url = 'http://us.battle.net/api/wow/realm/status'
     uri     = URI.parse api_url
     json    = Net::HTTP.get(uri)
-    JSON::parse(json).fetch('realms')
+    settings.cache.set('realm_json', json)
+    json
   rescue
     haml :'500'
   end
