@@ -36,6 +36,10 @@ helpers do
       pop
     end
   end
+
+  def realm_matches(realm, text)
+    realm["slug"].start_with?(text) || realm["name"].start_with?(text)
+  end
 end
 
 set :cache, Dalli::Client.new(ENV['MEMCACHE_SERVERS'], 
@@ -88,9 +92,11 @@ get '/' do
 end
 
 get '/:realm' do |name|
-  @data = realm_data.find_all do |realm|
-    realm["slug"].start_with?(name) || realm["name"].start_with?(name)
-  end
+  # @data = realm_data.find_all do |realm|
+  #   realm["slug"].start_with?(name) || realm["name"].start_with?(name)
+  # end
+  @data   = realm_data
+  @search = name
   haml :realms
 end
 

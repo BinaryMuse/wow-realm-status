@@ -1,10 +1,11 @@
-%h1
-  = link_to realm['name'], "/#{realm['slug']}"
-  = "(#{proper_realm_type realm['type']})"
+%div{'data-name' => realm['name'], :class => @search && !realm_matches(realm, @search) ? 'realm hidden' : 'realm'}
+  %h1
+    = link_to realm['name'], "/#{realm['slug']}"
+    = "(#{proper_realm_type realm['type']})"
 
-%p
-  Status:
-  = realm['status'] ? "Up" : "Down"
-  %br
-  Population:
-  = proper_realm_pop realm['population']
+  %p
+    Status:
+    = realm['status'] ? "Up" : "Down"
+    %br
+    Population:
+    = proper_realm_pop realm['population']

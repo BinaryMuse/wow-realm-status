@@ -1,0 +1,11 @@
+.hidden {
+  display: none;
+}
+
+.search_hidden {
+  display: none;
+}
+
+.search_shown {
+  display: block;
+}

@@ -1,3 +1,7 @@
+%p
+  Search:
+  %input{:type => 'text', :size => '30', :id => 'realm-searcher'}
+
 - @data.each do |realm|
   = partial :realm, :locals => { :realm => realm }
 
