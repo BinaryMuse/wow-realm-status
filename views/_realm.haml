@@ -3,6 +3,6 @@
 %p
   Status:
   = realm['status'] ? "Up" : "Down"
-%p
+  %br
   Population:
-  = realm['population'].upcase
+  = proper_realm_pop realm['population']

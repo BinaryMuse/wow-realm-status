@@ -19,6 +19,19 @@ helpers do
       "RP PvP"
     end
   end
+
+  def proper_realm_pop(pop)
+    case pop
+    when "high"
+      "High"
+    when "medium"
+      "Medium"
+    when "low"
+      "low"
+    else
+      pop
+    end
+  end
 end
 
 set :cache, Dalli::Client.new(ENV['MEMCACHE_SERVERS'], 
