@@ -4,43 +4,10 @@ require 'net/http'
 require 'uri'
 require 'json'
 require 'partials'
+require 'helpers'
 
 helpers Sinatra::Partials
-helpers do
-  def link_to(text, url)
-    "<a href='#{url}' />#{text}</a>"
-  end
-
-  def proper_realm_type(type)
-    case type
-    when "pvp"
-      "PvP"
-    when "pve"
-      "PvE"
-    when "rp"
-      "RP"
-    when "rppvp"
-      "RP PvP"
-    end
-  end
-
-  def proper_realm_pop(pop)
-    case pop
-    when "high"
-      "High"
-    when "medium"
-      "Medium"
-    when "low"
-      "Low"
-    else
-      pop
-    end
-  end
-
-  def realm_matches(realm, text)
-    realm["slug"].start_with?(text) || realm["name"].start_with?(text)
-  end
-end
+helpers Realmstatus::Helpers
 
 set :cache, Dalli::Client.new(ENV['MEMCACHE_SERVERS'], 
     :username => ENV['MEMCACHE_USERNAME'], 
@@ -83,7 +50,7 @@ def get_realm_json
   uri     = URI.parse api_url
   json    = Net::HTTP.get(uri)
   set_cache('realm_json', json)
-  set_cache('updated', Time.now)
+  set_cache('updated', Time.now, nil, :raw => true)
   json
 end
 
