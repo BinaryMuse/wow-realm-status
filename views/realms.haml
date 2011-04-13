@@ -2,6 +2,10 @@
   Search:
   %input{:type => 'text', :size => '30', :id => 'realm-searcher'}
 
+%p#time
+  Updated:
+  = (@time || Time.now).strftime("%l:%M %p, %Z")
+
 - @data.each do |realm|
   = partial :realm, :locals => { :realm => realm }
 

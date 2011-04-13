@@ -83,20 +83,20 @@ def get_realm_json
   uri     = URI.parse api_url
   json    = Net::HTTP.get(uri)
   set_cache('realm_json', json)
+  set_cache('updated', Time.now)
   json
 end
 
 get '/' do
   @data = realm_data
+  @time = get_cache('updated')
   haml :realms
 end
 
 get '/:realm' do |name|
-  # @data = realm_data.find_all do |realm|
-  #   realm["slug"].start_with?(name) || realm["name"].start_with?(name)
-  # end
   @data   = realm_data
   @search = name
+  @time   = get_cache('updated')
   haml :realms
 end
 
