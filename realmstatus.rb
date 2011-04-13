@@ -48,9 +48,26 @@ get '/favicon.ico' do
   nil
 end
 
-def realm_data
+def set_cache(key, data)
   begin
-    json = settings.cache.get('realm_json') || get_realm_json
+    settings.cache.set(key, data)
+  rescue Dalli::RingError
+    nil
+  end
+end
+
+def get_cache(key)
+  begin
+    settings.cache.get('realm_json')
+  rescue Dalli::RingError
+    nil
+  end
+end
+
+def realm_data
+  json = ''
+  begin
+    json = get_cache('realm_json') || get_realm_json
   rescue Dalli::RingError
     json = get_realm_json
   end
@@ -58,16 +75,11 @@ def realm_data
 end
 
 def get_realm_json
-  puts "Getting realm data from API"
-  begin
-    api_url = 'http://us.battle.net/api/wow/realm/status'
-    uri     = URI.parse api_url
-    json    = Net::HTTP.get(uri)
-    settings.cache.set('realm_json', json)
-    json
-  rescue
-    haml :'500'
-  end
+  api_url = 'http://us.battle.net/api/wow/realm/status'
+  uri     = URI.parse api_url
+  json    = Net::HTTP.get(uri)
+  set_cache('realm_json', json)
+  json
 end
 
 get '/' do
@@ -80,4 +92,8 @@ get '/:realm' do |name|
     realm["slug"].start_with?(name) || realm["name"].start_with?(name)
   end
   haml :realms
+end
+
+get '/wtf' do
+  return haml :'500'
 end
