@@ -4,7 +4,7 @@ require 'net/http'
 require 'uri'
 require 'json'
 require 'partials'
-require 'helpers'
+require 'text_helpers'
 
 helpers Sinatra::Partials
 helpers Realmstatus::Helpers
