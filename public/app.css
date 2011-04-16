@@ -3,6 +3,13 @@ html {
   overflow-y: scroll;
 }
 
+img#forkme {
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  border: none;
+}
+
 body {
   font-family: Arial, sans-serif;
 }

@@ -4,6 +4,11 @@ module Realmstatus
       "<a href='#{url}' />#{text}</a>"
     end
 
+    def image_tag(image, id = nil)
+      extra = id.nil? ? '' : "id='#{id}'"
+      "<img src='/#{image}' #{extra}/>"
+    end
+
     def proper_realm_type(type)
       case type
       when "pvp"
